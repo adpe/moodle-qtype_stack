@@ -27,41 +27,41 @@ matrix:
   # how to do that.
   include:
 
-    - php: 7.0
-      env: TASK=PHPUNIT        MOODLE_BRANCH=MOODLE_32_STABLE   DB=pgsql
+#    - php: 7.0
+#      env: TASK=PHPUNIT        MOODLE_BRANCH=MOODLE_32_STABLE   DB=pgsql
 
-    - php: 5.6
-      env: TASK=PHPUNIT        MOODLE_BRANCH=MOODLE_33_STABLE   DB=mysqli
+#    - php: 5.6
+#      env: TASK=PHPUNIT        MOODLE_BRANCH=MOODLE_33_STABLE   DB=mysqli
 
     # Would be good to run this next test in PHP 7.2, but STACK does not support that yet.
-    - php: 7.1
-      env: TASK=PHPUNIT        MOODLE_BRANCH=MOODLE_34_STABLE   DB=pgsql
+#    - php: 7.1
+#      env: TASK=PHPUNIT        MOODLE_BRANCH=MOODLE_34_STABLE   DB=pgsql
 
-    - php: 7.1
-      env: TASK=PHPUNIT        MOODLE_BRANCH=MOODLE_35_STABLE   DB=mysqli
+#    - php: 7.1
+#      env: TASK=PHPUNIT        MOODLE_BRANCH=MOODLE_35_STABLE   DB=mysqli
 
-    - php: 5.6
-      env: TASK=BEHAT          MOODLE_BRANCH=MOODLE_32_STABLE   DB=mysqli
+#    - php: 5.6
+#      env: TASK=BEHAT          MOODLE_BRANCH=MOODLE_32_STABLE   DB=mysqli
 
-    - php: 7.0
-      env: TASK=BEHAT          MOODLE_BRANCH=MOODLE_33_STABLE   DB=pgsql
+#    - php: 7.0
+#      env: TASK=BEHAT          MOODLE_BRANCH=MOODLE_33_STABLE   DB=pgsql
 
     - php: 7.1
       env: TASK=BEHAT          MOODLE_BRANCH=MOODLE_34_STABLE   DB=mysqli
 
     # Would be good to run this next test in PHP 7.2, but STACK does not support that yet.
-    - php: 7.1
-      env: TASK=BEHAT          MOODLE_BRANCH=MOODLE_35_STABLE   DB=pgsql
+#    - php: 7.1
+#      env: TASK=BEHAT          MOODLE_BRANCH=MOODLE_35_STABLE   DB=pgsql
 
-    - php: 7.1
-      env: TASK=CODESTYLE      MOODLE_BRANCH=MOODLE_35_STABLE   DB=mysqli
+#    - php: 7.1
+#      env: TASK=CODESTYLE      MOODLE_BRANCH=MOODLE_35_STABLE   DB=mysqli
 
-    - php: 7.1
-      env: TASK=CODEKNOWNFAILS MOODLE_BRANCH=MOODLE_35_STABLE   DB=mysqli
+#    - php: 7.1
+#      env: TASK=CODEKNOWNFAILS MOODLE_BRANCH=MOODLE_35_STABLE   DB=mysqli
 
   allow_failures:
-    - php: 7.1
-      env: TASK=CODEKNOWNFAILS MOODLE_BRANCH=MOODLE_35_STABLE   DB=mysqli
+#    - php: 7.1
+#      env: TASK=CODEKNOWNFAILS MOODLE_BRANCH=MOODLE_35_STABLE   DB=mysqli
 
 before_install:
   - phpenv config-rm xdebug.ini
@@ -96,7 +96,7 @@ script:
   - if [ "$TASK" = 'PHPUNIT' ];        then moodle-plugin-ci phpunit;     fi
 
   # Run all the Behat tests.
-  - if [ "$TASK" = 'BEHAT' ];          then moodle-plugin-ci behat;       fi
+  - if [ "$TASK" = 'BEHAT' ];          then moodle-plugin-ci behat --dump; fi
 
   # Run all the various code style tests - this subset should all pass.
   - if [ "$TASK" = 'CODESTYLE' ];      then moodle-plugin-ci phplint;     fi
